@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5b8c7dc-4599-4258-b98e-946a62de801f" name="Changes" comment="init 1.2" />
+    <list default="true" id="c5b8c7dc-4599-4258-b98e-946a62de801f" name="Changes" comment="Merge remote-tracking branch 'origin/init-1-1' into init-1-1">
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +51,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.main.executor": "Run",
+    "Python.test.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -126,7 +129,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769813628628</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="init 1.2">
+      <option name="closed" value="true" />
+      <created>1770049401861</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1770049401861</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Merge remote-tracking branch 'origin/init-1-1' into init-1-1">
+      <option name="closed" value="true" />
+      <created>1770049602334</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1770049602334</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,7 +163,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="init 1.1" />
     <MESSAGE value="init 1.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="init 1.2" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/init-1-1' into init-1-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/init-1-1' into init-1-1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
