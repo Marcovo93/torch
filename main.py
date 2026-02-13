@@ -1,7 +1,7 @@
-import sys; path = sys.argv[1]
+import sys
 import os
 
-def light_my_path():
+def light_my_path(path = sys.argv[1]):
     file_found = 0
     if os.path.exists(path):
         if not os.path.isdir(path):
