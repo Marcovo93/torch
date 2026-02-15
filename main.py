@@ -1,20 +1,20 @@
-import sys; path = sys.argv[1]
-from pathlib import Path
+import sys
 import os
 
-dir_found = 0
-file_found = 0
-
-
-if os.path.exists(path):
-    if not os.path.isdir(path):
-        print("that's not a dir")
+def light_my_path(path = sys.argv[1]):
+    file_found = 0
+    if os.path.exists(path):
+        if not os.path.isdir(path):
+            print("that's not a folder")
+        else:
+            for roots, dirs, files in os.walk(path):
+                for file in files:
+                    full_path_file = os.path.join(roots, file)
+                    print(full_path_file)
+                    file_found += 1
+            print(f"file found {file_found}")
     else:
-        for i in os.listdir(path):
-           print(path + i)
-           file_found += 1
-        print(f"file found {file_found}")
-else:
-    print("path not found")
+        print("path not found")
 
-print(os.path.getatime(path))
+
+light_my_path()
