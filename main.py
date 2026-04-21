@@ -1,18 +1,17 @@
 import sys
 import os
-import glob
 
 def light_my_path(path = sys.argv[1], format = sys.argv[2]):
+    file_found = 0
     if os.path.exists(path):
         if not os.path.isdir(path):
             print("that's not a folder")
         else:
             for roots, dirs, files in os.walk(path):
                 for file in files:
-                    full_path_file = os.path.join(roots, file)
-                    print(full_path_file)
-                    file_found += 1
-            print(f"file found {file_found}")
+                    percorso_completo = os.path.join(roots, file)
+                    if format in file:
+                        print(percorso_completo)
     else:
         print("path not found")
 
