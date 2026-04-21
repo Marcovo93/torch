@@ -9,8 +9,7 @@ def light_my_path(path = sys.argv[1], format = sys.argv[2]):
         else:
             for roots, dirs, files in os.walk(path):
                 for file in files:
-                    file_split = file.split(".")
-                    if format.lower() in file_split or format.upper() in file_split:
+                    if file.lower().endswith(format.lower()):
                         percorso_completo = os.path.join(roots, file)
                         file_found += 1
                         print(percorso_completo)
