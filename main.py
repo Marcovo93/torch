@@ -1,7 +1,7 @@
 import sys
 import os
 
-def light_my_path(path = sys.argv[1], format = sys.argv[2]):
+def light_my_path(path, format):
     file_found = 0
     if os.path.exists(path):
         if not os.path.isdir(path):
@@ -18,4 +18,6 @@ def light_my_path(path = sys.argv[1], format = sys.argv[2]):
     else:
         print("path not found")
 
-light_my_path()
+
+if __name__ == "__main__":
+    light_my_path(sys.argv[1], sys.argv[2])
