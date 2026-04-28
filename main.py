@@ -5,7 +5,7 @@ def light_my_path(path, format):
     file_found = 0
     if os.path.exists(path):
         if not os.path.isdir(path):
-            print("that's not a folder")
+            raise FileNotFoundError(f"Il percorso {path} non è una cartella")
         else:
             for roots, dirs, files in os.walk(path):
                 for file in files:
@@ -15,8 +15,9 @@ def light_my_path(path, format):
                         print(full_path)
 
             print(f"file found => {file_found}")
+            return file_found
     else:
-        print("path not found")
+        raise FileNotFoundError(f"Il percorso {path} non esiste!")
 
 
 if __name__ == "__main__":
