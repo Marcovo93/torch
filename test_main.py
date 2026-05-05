@@ -13,15 +13,7 @@ def test_tmp_folder(tmp_path):
         f1 = d / f"docs{i}.txt"
         f1.write_text(f"test numeber: {i}")
 
-    risultato = light_my_path(str(d), ".txt")
-    assert risultato == 10, f"mi aspetto 10 file .txt, ne ho trovati solo {risultato}"
-
-
-def test_real_folder():
-    path = "/Users/marcovolpe/Downloads/test_walk"
-    format = ".txt"
-    result = light_my_path(path, format)
-
-    assert result > 0, f"mi aspetto più di 0 file"
+    file_found, file_list = light_my_path(str(d), ".txt")
+    assert file_found == 10, f"mi aspetto 10 file .txt, ne ho trovati solo {file_found}"
 
 
