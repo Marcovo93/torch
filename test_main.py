@@ -9,19 +9,40 @@ def test_tmp_folder(tmp_path):
     d = tmp_path / "test_pyTest"
     d.mkdir()
 
-    for i in range(10):
+    expected_files = ["docs0.txt", "docs1.txt"]
+    for i in range(2):
         f1 = d / f"docs{i}.txt"
-        f1.write_text(f"test numeber: {i}")
+        f1.write_text(f"test number: {i}")
 
-    file_found, file_list = light_my_path(str(d), ".txt")
-    assert file_found == 10, f"mi aspetto 10 file .txt, ne ho trovati solo {file_found}"
+    f2 = d / f"docs.jpeg"
+    f2.write_text(f"test")
 
-def test_file_exists():
-    path = "/Users/marcovolpe/Downloads/"
-    list_test = ['tmb.txt', 'tmb copia 4jpg.txt', 'tmb copia.txt', 'tmb copia 3.txt', 'tmb copia 2.txt', 'tmb copia 5.txt', 'tmb copia 5 2.txt', 'tmb copia 5 3.txt', 'tmb copia 5 4.txt', 'tmb copia 5.txt']
-    file_found, file_list = light_my_path(path, ".txt")
+    file_list = light_my_path(str(d), ".txt")
+    expected_set = set(expected_files)
+    file_set = set(file_list)
+    assert expected_set == file_set
 
-    assert file_list == list_test, f"mi aspettavo questi file '{list_test}', ho ricevuto questi: {file_list}"
+    assert len(file_list) == len(expected_files)
+    for ef in expected_files:
+        found = False
+        for file in file_list:
+            if ef == file:
+                found = True
+                break
+        assert found == True, f"non trovato file {ef}"
 
 
+def test_list_camparison():
+    file_list = ["tmb2", "tmb3", "tmb1", "tmb4"]
+    expected_files = ["tmb1", "tmb2", "tmb3"]
+    file_list.sort()
+    expected_files.sort()
+    assert file_list == expected_files
 
+
+def test_set_camparison():
+    file_list = ["tmb2", "tmb3", "tmb1", "tmb3"]
+    file_set = set(file_list)
+    expected_files = ["tmb1", "tmb2", "tmb3"]
+    expected_set = set(expected_files)
+    assert file_set == expected_set
