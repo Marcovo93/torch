@@ -1,5 +1,6 @@
 import pytest
 from light import light_my_path
+
 def test_path_inesistente():
     with pytest.raises(FileNotFoundError):
         light_my_path("/unknow/path.txt", "txt")
