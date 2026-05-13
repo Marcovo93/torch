@@ -8,16 +8,33 @@ def light_my_path(path, format):
         if not os.path.isdir(path):
             raise FileNotFoundError(f"Il percorso {path} non è una cartella")
         else:
+            anno_mese_giorno, ore_minuti = light_my_date()
+            tmp_nfl = open('light_my_log','a')
+            tmp_nfl.write('------')
+            tmp_nfl.write('\n')
+            tmp_nfl.write(f'Log {anno_mese_giorno} - {ore_minuti}')
+            tmp_nfl.write('\n')
+            tmp_nfl.write('\n')
             for roots, dirs, files in os.walk(path):
                 for file in files:
                     if file.lower().endswith(format.lower()):
                         full_path = os.path.join(roots, file)
                         file_list.append(file.lower())
+                        tmp_nfl.write(file+'\n')
                         print(full_path)
-            light_my_log(file_list)
+            len_list = len(file_list)
+            tmp_nfl.write(f'Total file found => {len_list}')
+            tmp_nfl.write('\n')
+            tmp_nfl.write('------')
+            tmp_nfl.close()
             return file_list
     else:
         raise FileNotFoundError(f"Il percorso {path} non esiste!")
+
+def light_my_log(file):
+    tmp_nfl = open('light_my_log','a')
+    tmp_nfl.write(file+'\n')
+    return
 
 
 def light_my_date():
@@ -26,7 +43,7 @@ def light_my_date():
     ore_minuti, centesimi = ora_centesimi.split('.')
     return anno_mese_giorno, ore_minuti
 
-def light_my_log(file_list):
+def light_my_log_list(file_list):
     tmp_nfl = open('light_my_log', 'a')
     anno_mese_giorno, ore_minuti = light_my_date()
     tmp_nfl.write('\n')
@@ -44,3 +61,5 @@ def light_my_log(file_list):
     tmp_nfl.write('------')
     tmp_nfl.write('\n')
     tmp_nfl.close()
+
+#light_my_path('/Users/marcovolpe/Downloads/','jpg')
