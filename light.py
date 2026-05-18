@@ -9,6 +9,7 @@ def light_my_path(path, extension):
             yy_mm_dd, hour_minutes = date_hour()
             log_file = open(f'Log-{yy_mm_dd}', 'a')
             log_file.write(f'{yy_mm_dd} {hour_minutes}: file *.{extension} search starting...\n')
+            log_file.close()
             for roots, dirs, files in os.walk(path):
                 for file in files:
                     if file.lower().endswith(extension.lower()):
@@ -17,8 +18,9 @@ def light_my_path(path, extension):
                         create_log(file)
                         print(full_path)
             delta = cronos()
+            log_file = open(f'Log-{yy_mm_dd}', 'a')
             log_file.write(f'{yy_mm_dd} {hour_minutes}: process ended with no errors.\n')
-            log_file.write(f'Found {len(file_list)} files. it took {delta}ms')
+            log_file.write(f'Found {len(file_list)} files. it took {delta}ms\n\n')
             log_file.close()
             stop_cronos()
             return file_list
@@ -27,18 +29,16 @@ def light_my_path(path, extension):
     else:
         raise FileNotFoundError(f"The path {path} doesn't exist!")
 
-def create_log(file):
-    yy_mm_dd, hour_minutes = date_hour()
-    log_file = open(f'Log-{yy_mm_dd}', 'a')
-    yy_mm_dd, hour_minutes = date_hour()
-    log_file.write(f'{yy_mm_dd} {hour_minutes}: file {file}' + '\n')
-    log_file.close()
-
 def date_hour():
     time_now = datetime.now()
     yy_mm_dd, hour_cent = str(time_now).split(' ')
     hour_minutes, cent = hour_cent.split('.')
     return yy_mm_dd, hour_minutes
+
+def create_log(file):
+    yy_mm_dd, hour_minutes = date_hour()
+    log_file = open(f'Log-{yy_mm_dd}', 'a')
+    log_file.write(f'{yy_mm_dd} {hour_minutes}: file - {file}' + '\n')
 
 def start_cronos():
     time_now = datetime.now()
