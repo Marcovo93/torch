@@ -1,19 +1,61 @@
-import sys
 import os
+from datetime import datetime
 
-def light_my_path(path, format):
+def light_my_path(path, extension):
+    start_cronos()
     file_list = []
-    if os.path.exists(path):
-        if not os.path.isdir(path):
-            raise FileNotFoundError(f"Il percorso {path} non è una cartella")
-        else:
-            for roots, dirs, files in os.walk(path):
-                for file in files:
-                    if file.lower().endswith(format.lower()):
-                        full_path = os.path.join(roots, file)
-                        file_list.append(file.lower())
-                        print(full_path)
+    yy_mm_dd, hour_minutes, cent = date_hour()
 
-            return file_list
-    else:
-        raise FileNotFoundError(f"Il percorso {path} non esiste!")
+    if not os.path.exists(path):
+        log_file = open(f'Log-{yy_mm_dd}', 'a')
+        log_file.write(f'{yy_mm_dd} {hour_minutes} FileNotFoundError: The path {path} doesnt exist\n\n')
+        raise FileNotFoundError(f"The path {path} doesn't exist!")
+
+    if not os.path.isdir(path):
+        log_file = open(f'Log-{yy_mm_dd}', 'a')
+        log_file.write(f'{yy_mm_dd} {hour_minutes} FileNotFoundError: The path {path} is a file\n\n')
+        raise FileNotFoundError(f"The path {path} is a file!")
+
+    log_file = open(f'Log-{yy_mm_dd}', 'a')
+    log_file.write(f'{yy_mm_dd} {hour_minutes}: file *.{extension} search starting...\n')
+    log_file.close()
+    for roots, dirs, files in os.walk(path):
+        for file in files:
+            if file.lower().endswith(extension.lower()):
+                full_path = os.path.join(roots, file)
+                file_list.append(file.lower())
+                create_log(file)
+                print(full_path)
+    delta = cronos()
+    log_file = open(f'Log-{yy_mm_dd}', 'a')
+    log_file.write(f'{yy_mm_dd} {hour_minutes}: process ended with no errors.\n')
+    log_file.write(f'Found {len(file_list)} files. it took {delta}ms\n\n')
+    log_file.close()
+    stop_cronos()
+    return file_list
+
+def date_hour():
+    time_now = datetime.now()
+    yy_mm_dd, hour_cent = str(time_now).split(' ')
+    hour_minutes, cent = hour_cent.split('.')
+    return yy_mm_dd, hour_minutes, cent
+
+def start_cronos():
+    yy_mm_dd, hour_cent, cent = date_hour()
+    return cent
+
+def stop_cronos():
+    yy_mm_dd, hour_cent, cent = date_hour()
+    return cent
+
+def cronos():
+    start = int(start_cronos())
+    stop = int(stop_cronos())
+    delta = stop - start
+    return delta
+
+def create_log(file):
+    yy_mm_dd, hour_minutes, cent = date_hour()
+    log_file = open(f'Log-{yy_mm_dd}', 'a')
+    log_file.write(f'{yy_mm_dd} {hour_minutes}: file - {file}' + '\n')
+
